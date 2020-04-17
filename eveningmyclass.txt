@@ -1,0 +1,505 @@
+linux:
+
+normal user: $
+Root user: #
+
+commands:
+clear screen: clear
+pwd: present working directory : pwd
+list : ls -latr 
+list : ls ( horizantal)
+ls - a - hidden files)
+ls -l - vertical
+
+disc space : df -h
+
+ram : free-m 
+directory size : du -sh directory (*)
+
+swith root user : sudo su -
+date cmd : date
+normal user : sudo su sathish
+
+system info : top (crtl cor d)
+
+network cmd:
+
+
+
+
+
+
+
+
+
+
+ping google.com
+0% loss- successfully connection has been established 
+100% loss- there is no connectivity
+telnet icici.com 5050
+nslookup google.com
+
+directory:
+create dry: mkdir dryname
+tree path : mkdir -p india/hyd/gaw/dlf/cgi/ tree
+chande dry: cd dryname
+rename dry: mv srcname desiredryname
+cut & paste: mv srcname drypath
+copy & paste : cp srcname drypath
+remove : rm -rf dryname
+
+filecmd:
+empty file : touch filename
+
+editor : vi filename  or vim filename  or nano filename 
+step1: insert 'i' #allows you modify
+step: esc shift:wq or wq! or esc shift:q!(unsave)
+
+see content of the file : cat filename
+
+find srting a file :   grep -i "string" filename 
+recursive all : grep -iR "devops" *
+replace a string : sed -i 's/oldname/newname/g' filename
+sed -i 's/dev/sit/g' config.xml
+
+cut 
+awk  - 
+cut column wise 
+
+| pipe
+permissions
+install packages
+set up env variable
+
+cut :
+
+cut -c 2 filename 
+
+cut -c 1,5 filename
+
+cut -c 1-5 filename  
+
+
+awk : syntax :
+
+awk '{print $n}'
+
+awk '{print $n,$n}' filename 
+
+redirect cmd 
+
+cmd > test  - always new data
+cmd >> test  - append (add)
+
+Pipe  (|)
+
+pipe exp:
+df -h | grep /dev/xvda1 | awk '{print $2}' | cut -c 1
+ls -latr | grep azuredevops | awk '{print $9}' >> test.log
+
+tar cmd: zip
+tar -cvf  destname.tar  srcname 
+
+untar
+
+tar -xvf dest.tar
+
+rpm:
+
+rpm -ivh filename.rpm 
+rpm -qa filename.rpm
+rpm -ivh jenkins-2.230-1.1.noarch.rpm
+
+zip or unzip
+zip -r devops.zip devops
+unzip devops.zip
+
+permissions:
+directory
+file
+owner - 3 di  r-read-4   w- write-2   execute-x-1  7 =4+2+1
+gropu- 3   7
+normal- 3  7
+
+7r-xr-x
+
+
+chmod -R  777  devops 
+
+rwxrwxrwx  devops 
+
+owner - r   x-  5
+gropu - r  x - 4+1=5
+user x - 1 
+
+chmod -R 551  devops 
+chmod -R 777 devops 
+
+
+chmod -R 711 devops 
+
+create users:
+useradd sathish
+passwd sathish
+sathish has been created 
+
+change passwd
+passwd sathish
+
+
+
+owership:
+user
+ansible
+syntax:
+sudo chown -R hari:hari /opt
+sudo chown -R hari:hari opt
+where we are able to see users:
+cat /etc/passwd
+
+
+install s/ws:  yum repo 
+s/ws needs to added in yum repo by admin team
+
+yum install java -y
+yum remove java -y
+
+wget URL
+
+10-04-2020:
+
+Find
+ps -ef
+netstat
+how to set up env
+ssh-keygen(optional)
+
+find:
+
+find location -type f -name name
+
+find location -type d -name name
+exm:
+find /opt -type d -name name
+
+large files 
+find /opt -size +50M
+ 
+du -sh * | sort -n -r | head -3
+
+find /opt -type f -mtime +7 -exec rm {} \;  - delete older logs
+
+How to check process whether running or not
+ps -ef | grep java 
+ps -ef | grep tomcat
+ kill -9 4001
+ pkill 4001
+
+netstat  -anp | grep 8080
+
+how to set up evn variables:
+javacode - javac
+maven - mvn compile  
+
+donot bother account 
+vi ~/.bash_profile
+
+exm: /home/ec2-user/.bash_profile
+     /home/sathish
+     /home/pradeep
+m2_home
+/
+
+[root@manager apache-maven-3.6.3]# cd bin
+path
+/opt/apache-maven-3.6.3/bin
+
+
+export M2_HOME=/opt/softwares/apache-maven-3.6.3/
+export PATH=$PATH:/opt/softwares/apache-maven-3.6.3/bin
+export JAVA_HOME=/opt/softwares/jdk1.8.0_131/
+export PATH=$PATH:/opt/softwares/jdk1.8.0_131/bin
+
+sshkeygen:
+connect one linux to another linux 
+ssh username@ip
+enter passwd of destinationserver
+
+how to move a file one linux to another linux
+
+scp filename username@ip:/opt
+scp -r directory username@ip:/opt
+enter passwd: 
+
+
+step1: 
+create one common user both servers - deployer
+useradd deployer
+passwd deployer
+step2:
+visudo  # get root previllages 
+## Allow root to run any commands anywhere
+root    ALL=(ALL)       ALL
+deployer ALL=(ALL)     NOPASSWD: ALL
+
+
+aws:
+step3:  open /etc/ssh/sshd_config file and uncomment in both
+ PasswordAuthentication yes
+ste4: restart sshd 
+* restart sshd 
+service sshd restart
+
+step5 : without passwd process
+go to useraccount
+sudo su deployer
+ssh-keygen - master 
+ssh-copy-id username@ip 
+
+How to see logs:
+
+tail -100f /var/log/icici/debit.log
+tail -1000f /var/log/icici/credit.log
+tail -f /var/log/icici/loan.log
+
+tail -10f cloud.log | grep DEBUG or error 
+
+eg:
+icici
+ dedit - 100
+ credit -100
+ insurance -120 
+ home loads-130
+ gold loans-
+ vehical loads
+ 
+ appliction - 
+ 
+ dedit - branch 
+ /tomcat/webapps/debit.war
+ /var/logs/debit.log
+           debit-24  8760
+		   
+		   2 yesra175202019 218  2020
+		   
+		   tail -f logfile
+		   tail -100f logfile
+
+crontab :
+crontab -e  editor
+crontab -l - list
+crontab -r - delete
+how to set up crontab :
+Linux Crontab Format
+
+MIN HOUR DOM MON DOW CMD
+
+* * * * * cmd or scripts
+
+Field    Description    Allowed Value
+MIN      Minute field    0 to 59
+HOUR     Hour field      0 to 23
+DOM      Day of Month    1-31
+MON      Month field     1-12
+DOW      Day Of Week     0-6
+CMD      Command         Any command to be executed.
+
+
+4:30PM
+
+*/30 */16 * * * rm -rf /opt/tomcat/*.log
+eployer@pkcitas01:~$ crontab -l
+
+
+#0 0 * * * find /var/log/support/monitoring/logs -type f -mtime +7 -exec rm {} \;                                                                                       
+
+#0 */2 * * * sudo bash /home/deployer/monitoring/scripts/diskmonitoring.sh
+
+#0 */2 * * * sudo bash /home/deployer/monitoring/scripts/Cronmonitoring.sh
+
+*/15 * * * * bash /home/deployer/monitoring/scripts/Ms_status_check.sh
+
+*/1 * * * * rm -rf /opt/*.log
+
+0 0 * * * rm -rf /opt/*.log
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CST US- 6.5
+IST- 4.47
+------------
+shell
+
+to excut scrptis test .sh
+to see d comment s and disply mgs (sh -x test.sh)
+
+
++ echo 'my beby'
+my beby
+
+
+
+
+
+#!/bin/bash
+
+cd /tmp
+touch abn
+cp abn abn.warbackup
+cp abn.warbackup /opt/abn.warbackup
+
+
+cd /opt
+touch wwe
+cd /tmp
+touch wwe
+cp wwe wwe.warbackup
+mv wwe.warbackup /opt/wwe.warbackup
+cd /opt
+rm -rf wwe
+
+
+---------------------
+#!/bin/bash
+file=/opt/allogs.log
+touch $file
+echo " 1st cretd on both diretyd 2 files "  >>  $file
+touch /opt/mylov /tmp/mylov
+echo " 2nd copying /tmp to /opt take backjup "  >>  $file
+cp /tmp/mylov /opt/mylovbackup
+echo " 3rd copying both backups "  >>  $file
+cp /opt/mylovbackup /tmp/mylovbackup
+echo " revoing mylov "  >>  $file
+rm -rf /opt/mylov
+echo " evrthinf will good "  >>  $file
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+                                                                                                                                      

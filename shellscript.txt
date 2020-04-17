@@ -1,0 +1,361 @@
+shell script:
+
+
+What is Shell
+A shell is special user program which provide an interface to user to use operating system services. Shell accept human readable commands from user.
+
+There are several shells are available for Linux systems like – 
+BASH (Bourne Again SHell) – It is most widely used shell in Linux systems. It is used as default login shell in Linux systems and in macOS. It can also be installed on Windows OS.
+CSH (C SHell) – The C shell’s syntax and usage are very similar to the C programming language.
+KSH (Korn SHell) – The Korn Shell also was the base for the POSIX Shell standard specifications etc. 
+
+Each shell script is saved with .sh file extension 
+eg. myscript.sh
+ chmod -x myscript.sh  or chmod -R 777 myscript.sh 7 r-4 w -2 x-1 
+ chmod 001 myscript.sh
+655 
+To execute:
+ ./myscript.sh
+or
+sh myscript.sh
+
+how to write a pro:
+
+#!/bin/sh - first line
+
+comment:
+#  this program desined by sathish
+#  sh dathish.sh - execution flow 
+# do not as user account 
+ 
+
+how to print a line:
+
+echo "welcome to devops"
+
+:wq
+
+chmod -R 777 name
+./
+sh
+
+read a input:
+
+
+read name
+read age
+read roll
+
+variables:  dev qa proprod prod 
+15
+20
+name=value
+a=15
+b=20
+username=sit
+passwd=sit@123
+
+run time parameters:
+$0 $1 $2 
+scriptname 
+para sri 12345 22
+
+user=$1 -sri
+pin=$2 -12345
+age=$3 22
+echo "$user"
+$0 - pro name
+$@- number of parameters
+$#- count
+$$ - process 
+$? - status of last cmd 
+it retrus - 0
+te retus- 1
+
+cp sbi.war /opt/tomcat/webapps/
+if $? == 0
+echo "sucfully deployed "
+else
+echo "not deployed"
+24 format 4:30 16  -hour:30 -mints
+crontab -e
+
+*/1 * * * * sh /opt/scripts/devops/delete.sh
+:wq
+crontab -l
+crontab -r
+
+
+if statement: decision making 
+The basic syntax of an if … then statement is like this:
+== >= <= !=   -ge -lt -eq
+if <condition>; then
+<commands>
+fi
+
+#!/bin/sh
+a=19
+
+if [ a >= 19 ] ; then
+echo " he is "
+fi
+
+cp -r /opt/scripts/devops/sbi.war /tmp/
+
+if ...else
+if [ -f somefile ]; then
+        echo "The file 'somefile' exists but is not readable to the script."
+else
+        echo "The file 'somefile' does not exist."
+fi
+deploy.log
+number of choice:
+
+case  $variable-name  in
+                pattern1)       
+     		    command1
+                    ...
+                    ....
+                    commandN
+                    ;;
+                pattern2)
+     		    command1
+                    ...
+                    ....
+                    commandN
+                    ;;            
+                patternN)       
+     		    command1
+                    ...
+                    ....
+                    commandN
+                    ;;
+                *)              
+          esac 
+
+
+ex:
+#!/bin/bash
+NOW=$(date +"%a")	
+case $NOW in
+	Mon)	
+		echo "Full backup";;
+	Tue|Wed|Thu|Fri)
+		echo "Partial backup";;
+	Sat|Sun)	
+		echo "No backup";;
+	*) ;;
+esac
+
+
+
+Conditions  statements:
+
+Conditional Statements: There are total 5 conditional statements which can be used in sheell programming
+
+if statement 
+if-else statement
+if..elif..else..fi statement (Else If ladder)
+if..then..else..if..then..fi..fi..(Nested if)
+switch statement
+
+syntax:
+if <condition>; then
+<commands>
+
+fi
+<condition>
+-ge
+ -le
+ ==
+ !=
+ -f 
+ [ -d /opt/sathish ]
+ if ...else 
+ 
+if <condition>; then
+<commands>
+
+else
+<commands>
+fi
+
+
+Mail:
+echo "Message Body Here" | mail -s "Subject Here" user@example.com -A backup.zip
+list= theetisatish@gmail.com,kishore@gmail.com,pradeep@gmail.com,
+echo "dang" | mail -s "Red aleart" theetisatish@gmail.com
+
+echo "dang" | mail -s "Red aleart" $list
+#!/bin/sh
+
+a=40
+b=20
+if [ "$a" -ge  "$b" ]; then
+echo "a is big"
+else
+echo "b is big"
+
+fi
+
+
+#!/bin/sh
+
+disc=`df -h | grep /dev/xvda1 | awk '{print $5}' | cut -c 1-2`
+echo "$disc"
+list=theetisatish@gmail.com,sampathkiran.beram@gmail.com,sahudh786@gmail.com
+
+lt=25
+if [ "$disc" -ge "$lt" ]; then
+
+echo "dangerous alret: needs to clean up discspace" | mail -s "Red aleart"  $list
+fi
+
+if [ "$disc" -le "$lt" ]; then
+
+echo "no need to clean up discspace"
+fi
+
+
+3.[root@ip-172-31-43-105 opt]# crontab -l
+*/1 * * * * sh /opt/discspace.sh
+
+
+4. #!/bin/sh
+
+src=/tmp/us.tar
+dest=/opt
+
+env=$1  ===dev
+
+if [ "$env" == "dev" ]; then
+mv $src $dest/$env
+fi
+
+if [ "$env" == "sit" ]; then
+mv $src $dest/$env
+fi
+
+
+
+if [ "$env" == "preprod" ]; then
+mv $src $dest/$env
+fi
+
+
+
+if [ "$env" == "prod" ]; then
+mv $src $dest/$env
+fi
+
+
+switch statement:
+
+case expression in
+    pattern1 )
+        statements ;;
+    pattern2 )
+        statements ;;
+    ...
+esac
+
+
+example:
+env=$1
+
+case $env in
+    "dev" )
+        cp /tmp/icici.war /opt/$env ;;
+    "sit" )
+        cp /tmp/icici.war /opt/$env ;;
+    "*" )
+	echo "ur option is wrong give either dev or sit as $1"
+esac
+
+
+functions:
+
+
+func1()
+{
+    statement
+}
+
+func2()
+{
+    ststement
+}
+
+
+
+
+example:
+
+#!/bin/sh
+
+src=/tmp/us.tar
+dest=/opt
+move()
+{
+username=$1
+passwd=$2
+ip=$3
+scp $src $username@$ip:/opt
+
+
+}
+
+env=$1
+
+if [ "$env" == "dev" ]; then
+move deployer deployer@123 10.9.45.8
+fi
+
+if [ "$env" == "sit" ]; then
+move
+fi
+
+
+
+if [ "$env" == "preprod" ]; then
+move
+fi
+
+
+
+if [ "$env" == "prod" ]; then
+move
+fi
+
+
+
+--------------------------------------
+my 1st scrpt
+
+
+#!/bin/sh
+src=/tmp/us.war
+dest=/opt/dev/
+env=$1
+if [ "$env" == "dev" ]; then
+mv $src $dest
+fi
+~
+
+#!/bin/bash
+src=/tmp/us.war
+dest=/opt
+env=$1
+if [ "$env" == "$dev" ]
+dev
+fi
+
+dev()
+{
+scp $src test@18.209.210.89:/opt/$env
+}
+
+
+
+
+
